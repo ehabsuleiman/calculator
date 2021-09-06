@@ -1,6 +1,6 @@
 from enum import Enum
 import re
-from  calculator.token_pkg.token_class import Token
+from typing import NamedTuple
 from calculator.utils import is_num,is_parentheses,is_operator,sanitize_string,Types
 
 
@@ -10,6 +10,12 @@ class Notaions(Enum):
     POSTFIX = 'POSTFIX'
     PREFIX = 'PREFIX'
 
+OPERATORS_INFO = {
+    '*': 3, '/': 3,
+    '+': 2, '-': 2,
+}
+
+
 
 PARENTHESES = ['(',')']
 OPERATORS_INFO = {
@@ -18,6 +24,29 @@ OPERATORS_INFO = {
 }
 OPERATORS = OPERATORS_INFO.keys()
 OPERATORS_STRING = ''.join(OPERATORS)
+
+"""
+just a class to give a type and value of token for more readability
+and to keep code consistent and robust
+
+""" 
+
+class Token(NamedTuple):
+    type: str
+    value: str
+
+
+    #gets precedence of operator
+    @property
+    def precedence(self):
+        if self.type == Types.OPERATOR:
+           return OPERATORS_INFO[self.value]
+    
+    def is_less_precedent(self,token):
+        if self.type == Types.OPERATOR:
+            if self.precedence<=token.precedence:
+                return True
+        return False 
 
 
 """

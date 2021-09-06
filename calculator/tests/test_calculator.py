@@ -1,6 +1,6 @@
 import unittest
-from calculator.notations.infix import InvalidCharacterError,InvalidOperationsError,InvalidParenthesesError,InvalidRpnError
-from calculator.calculator_mod import evaluate_postfix,evaluate_infix_expression,evaluate_rpn_expression
+from calculator.notations import InvalidCharacterError,InvalidOperationsError,InvalidParenthesesError,InvalidRpnError
+from calculator.calculator_mod import evaluate_infix_expression,evaluate_postfix_expression
 
 
 #using python library unittest to test
@@ -61,11 +61,11 @@ class TestCalc(unittest.TestCase):
 
     #testing rpn functionalities also shows the modularity of the implementation
     def test_rpn_evaluate(self):
-        self.assertEqual(evaluate_rpn_expression('3 5 6 + *'),33)
+        self.assertEqual(evaluate_postfix_expression('3 5 6 + *'),33)
     
     def test_rpn_exceptions(self):
-        self.assertRaises(InvalidRpnError,evaluate_rpn_expression,'5 + 5')      
-        self.assertRaises(ZeroDivisionError,evaluate_rpn_expression,'5 0 /')      
+        self.assertRaises(InvalidRpnError,evaluate_postfix_expression,'5 + 5')      
+        self.assertRaises(ZeroDivisionError,evaluate_postfix_expression,'5 0 /')      
 
 
 if __name__ == '__main__':

@@ -1,21 +1,10 @@
 
 from calculator.token_pkg.tokenizer import Tokenizer
 from calculator.utils import Types, remove_brackets
-from calculator.notations.postfix import postfix
+from calculator.notations import InvalidCharacterError,InvalidExpressionError,InvalidOperationsError,InvalidParenthesesError
+from calculator.notations.postfix import Postfix
 
-class InvalidCharacterError(Exception):
-    def __init__(self,index):
-        self.index = index
-class InvalidParenthesesError(Exception):
-    pass
-class InvalidExpressionError(Exception):
-    pass 
-class InvalidOperationsError(Exception):
-    pass      
-class InvalidRpnError(Exception):
-    pass
-
-class infix():
+class Infix():
     def __init__(self,exp):
         self.expression = exp
 
@@ -39,8 +28,6 @@ class infix():
             return True
         else:
             raise InvalidParenthesesError
-
-
 
     #validates the expression  
     def validate_expression(self):
@@ -89,7 +76,7 @@ class infix():
     def evaluate_expression(self):
 
         postfix_expression = self.get_postfix()
-        return postfix.evaluate_expression(postfix_expression)
+        return  Postfix.evaluate_expression_tokens(postfix_expression)
 
     def get_postfix(self):
 

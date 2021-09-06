@@ -1,11 +1,11 @@
 
 import operator
-from calculator.notations.infix import InvalidCharacterError, InvalidRpnError
 from calculator.utils import Types
 from calculator.token_pkg.tokenizer import Tokenizer,Notaions
+from calculator.notations import InvalidRpnError,InvalidCharacterError
 
 
-class postfix:
+class Postfix:
     def __init__(self,exp):
         self.expression = exp
 
@@ -58,7 +58,7 @@ class postfix:
 
                 num1 = stack.pop()
                 num2 = stack.pop()
-                stack.append(self.do_operation(token.value,num2,num1))
+                stack.append(Postfix.do_operation(token.value,num2,num1))
             else:
                 # something wrong
                 raise InvalidRpnError
@@ -94,7 +94,7 @@ class postfix:
 
                 num1 = stack.pop()
                 num2 = stack.pop()
-                stack.append(self.do_operation(token.value,num2,num1))
+                stack.append(Postfix.do_operation(token.value,num2,num1))
             else:
                 # something wrong
                 raise InvalidRpnError
@@ -106,7 +106,7 @@ class postfix:
 
 
     @staticmethod
-    def evaluate_expression(tokens):
+    def evaluate_expression_tokens(tokens):
 
         stack = []
 
@@ -119,7 +119,7 @@ class postfix:
 
                 num1 = stack.pop()
                 num2 = stack.pop()
-                stack.append(postfix.do_operation(token.value,num2,num1))
+                stack.append(Postfix.do_operation(token.value,num2,num1))
             else:
                 # something wrong
                 raise InvalidRpnError
@@ -144,7 +144,7 @@ class postfix:
             return (e)
 
     def __eq__(self, other):
-        if self.evaluate_expression()== other.evaluate_expression() :
+        if self.evaluate_expression()== other.evaluate_expression():
             return "both expressions are equal"
         else:
             return "expressions are not equal"
