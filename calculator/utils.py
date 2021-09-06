@@ -1,9 +1,15 @@
 import re
 from enum import Enum
+OPERATORS_INFO = {
+    '*': 3, '/': 3,'%':3,
+    '+': 2, '-': 2,
+}
+
+OPERATORS = OPERATORS_INFO.keys()
+OPERATORS_STRING = ''.join(OPERATORS)
 
 
-OPERATORS = ['/','*','+','-']
-PARENTHESES = ['(',')']
+
 
 
 #enum to avoid errors
@@ -26,7 +32,7 @@ def is_operator(str):
     return str in OPERATORS
     
 def is_parentheses(str):
-    return str in PARENTHESES
+    return str in ['(',')']
 
 def is_num(s):
     try:

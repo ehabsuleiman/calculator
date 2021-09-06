@@ -36,6 +36,8 @@ class Postfix:
             return operator.truediv(num1,num2)
         elif operation == '*':
             return operator.mul(num1, num2)
+        elif operation == '%':
+            return operator.mod(num1,num2)
         else:
             #operation not supported
             print('operation {operation} is not supported ')

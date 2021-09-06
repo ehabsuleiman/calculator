@@ -4,7 +4,7 @@ from calculator import InvalidCharacterError,InvalidOperationsError
 from calculator import evaluate_infix_expression,evaluate_postfix_expression,Postfix,evaluate_expressions
 
 
-res = calculator.evaluate_infix_expression('4+4+4+4')
+res = calculator.evaluate_infix_expression('4+4+4%4')
 print(res)
 
 rpn = calculator.evaluate_postfix_expression('4 4 +')

@@ -1,7 +1,7 @@
 from enum import Enum
 import re
 from typing import NamedTuple
-from calculator.utils import is_num,is_parentheses,is_operator,sanitize_string,Types
+from calculator.utils import is_num,is_operator,sanitize_string,Types,OPERATORS_INFO,OPERATORS_STRING,OPERATORS
 
 
 #enum to avoid errors
@@ -10,20 +10,6 @@ class Notaions(Enum):
     POSTFIX = 'POSTFIX'
     PREFIX = 'PREFIX'
 
-OPERATORS_INFO = {
-    '*': 3, '/': 3,
-    '+': 2, '-': 2,
-}
-
-
-
-PARENTHESES = ['(',')']
-OPERATORS_INFO = {
-    '*': 3, '/': 3,
-    '+': 2, '-': 2,
-}
-OPERATORS = OPERATORS_INFO.keys()
-OPERATORS_STRING = ''.join(OPERATORS)
 
 """
 just a class to give a type and value of token for more readability
