@@ -1,6 +1,6 @@
 import calculator
 from calculator import InvalidCharacterError
-from calculator.evaluator_pkg.postfix import InvalidOperationsError
+from calculator.notations.infix import InvalidOperationsError
 
 
 res = calculator.evaluate_infx_expression_with_feedback('4+4+4+4')

@@ -1,5 +1,5 @@
 import unittest
-from calculator.evaluator_pkg.postfix import InvalidCharacterError,InvalidOperationsError,InvalidParenthesesError,InvalidRpnError
+from calculator.notations.infix import InvalidCharacterError,InvalidOperationsError,InvalidParenthesesError,InvalidRpnError
 from calculator.calculator_mod import evaluate_postfix,evaluate_infix_expression,evaluate_rpn_expression
 
 

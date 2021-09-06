@@ -8,6 +8,17 @@ from calculator.utils import is_num,is_parentheses,is_operator,sanitize_string,T
 class Notaions(Enum):
     INFIX = 'INFIX'
     POSTFIX = 'POSTFIX'
+    PREFIX = 'PREFIX'
+
+
+PARENTHESES = ['(',')']
+OPERATORS_INFO = {
+    '*': 3, '/': 3,
+    '+': 2, '-': 2,
+}
+OPERATORS = OPERATORS_INFO.keys()
+OPERATORS_STRING = ''.join(OPERATORS)
+
 
 """
 Tokenizer class takes in an expression and can spit out with a list of token class
@@ -40,7 +51,7 @@ class Tokenizer:
         elif self.notation == Notaions.POSTFIX:
             tokens = self.split_postfix_expression(self.expression)
         else:
-            print("Notation not supported yet")
+            print("Notation not supported yet.")
 
         return Tokenizer.construct_token_array(tokens)
 
@@ -76,7 +87,7 @@ class Tokenizer:
     def split_postfix_expression(exp):
 
         #finds operators,deciamals,numbers
-        res = re.findall(r'[0-9\.]+|[*/+-]', exp)
+        res = re.findall(rf'[0-9\.]+|[{OPERATORS_STRING}]', exp)
 
         n = len(res)
 
@@ -97,7 +108,7 @@ class Tokenizer:
         exp = sanitize_string(exp)
 
         #finds operators,deciamals,numbers
-        res = re.findall(r'[0-9\.]+|[^0-9\  .]|[()^*/+-]', exp)
+        res = re.findall(rf'[0-9\.]+|[^0-9\  .]|[(){OPERATORS_STRING}]', exp)
 
         n = len(res)
 

@@ -1,6 +1,6 @@
 from calculator.token_pkg.tokenizer import Tokenizer,Notaions
-from calculator.evaluator_pkg.postfix  import InvalidCharacterError, InvalidOperationsError, InvalidParenthesesError, InvalidExpressionError,InvalidRpnError,ConvertToPostfix 
-from calculator.evaluator_pkg.rpn_evaluator  import evaluate_postfix
+from calculator.notations.infix import InvalidCharacterError, InvalidOperationsError, InvalidParenthesesError, InvalidExpressionError,InvalidRpnError,infix 
+from calculator.notations.postfix  import postfix
 
 
 """
@@ -15,45 +15,30 @@ module Calculator has the following main methods:
 """ 
 
 
-#evaluate_rpn: returns the evaluation of an rpn from postfix notation that is initizlaized with tokens
-def evaluate_rpn_tokens(postfix_tokens):
-    res = evaluate_postfix(postfix_tokens)
-    return res
-
 #evaluate_rpn: returns the evaluation of an rpn from postfix notation 
-def evaluate_rpn_expression(postfix):
-    tokens = Tokenizer(postfix,Notaions.POSTFIX).tokens
-    res = evaluate_postfix(tokens)
-    return res      
+def evaluate_postfix_expression(expression):
+    res = postfix(expression)
+    return res.evaluate_expression()      
    
 #evaluate_expression: returns a decimal evaluation of the expression
 def evaluate_infix_expression(expression):
-    res = ConvertToPostfix(expression) 
-    res = evaluate_postfix(res.infix_to_postfix())
-    return res
+    res = infix(expression)
+    return res.evaluate_expression()    
 
 #evaluate_expression: returns a decimal evaluation of a infix expression with feedback
 def evaluate_infx_expression_with_feedback(expression):
 
     try:
-        res = evaluate_rpn_tokens(calculate_postfix(expression))
-        return (f'[✓] The value of the expression is : {res} ')
-    except InvalidCharacterError as e:
-        return (f"[✕] Invalid Character '{e}' found in expression.")
-    except InvalidExpressionError:
-        return (f'[✕] The Expression entererd is invalid.')
-    except InvalidOperationsError:
-        return ("[✕] Invalid order of opertaions.")
-    except InvalidParenthesesError:
-        return ("[✕] Parantheses in expression are mismatched.")
-    except ZeroDivisionError:
-        return ("[✕] The expression attempts to divide by zero.")
-    except ValueError as e:
-        return (e)
+        res = infix(expression)
+        return res.__str__
+    except:
+        return ('An error occured in evaluating expression')
+#evaluate_expression: returns a decimal evaluation of a infix expression with feedback
+def evaluate_postfix_expression_with_feedback(expression):
 
+    try:
+        res = postfix(expression)
+        return res.__str__
+    except:
+        return ('An error occured in evaluating expression')
     
-
-#returns a list initilized with token class from an expression string
-def calculate_postfix(expression):
-    res = ConvertToPostfix(expression) 
-    return res.infix_to_postfix()

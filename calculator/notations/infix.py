@@ -1,6 +1,7 @@
 
 from calculator.token_pkg.tokenizer import Tokenizer
 from calculator.utils import Types, remove_brackets
+from calculator.notations.postfix import postfix
 
 class InvalidCharacterError(Exception):
     def __init__(self,index):
@@ -14,7 +15,7 @@ class InvalidOperationsError(Exception):
 class InvalidRpnError(Exception):
     pass
 
-class ConvertToPostfix():
+class infix():
     def __init__(self,exp):
         self.expression = exp
 
@@ -85,7 +86,12 @@ class ConvertToPostfix():
                 raise InvalidOperationsError
             
 
-    def infix_to_postfix(self):
+    def evaluate_expression(self):
+
+        postfix_expression = self.get_postfix()
+        return postfix.evaluate_expression(postfix_expression)
+
+    def get_postfix(self):
 
         """
         parameter: a list of tokens initiated with class tokenizer
@@ -145,10 +151,23 @@ class ConvertToPostfix():
 
 
 
+    def __str__(self):
 
-
-
-
+        try:
+            res = self.evaluate_expression()
+            return (f'[✓] The value of the expression is : {res} ')
+        except InvalidCharacterError as e:
+            return (f"[✕] Invalid Character '{e}' found in expression.")
+        except InvalidExpressionError:
+            return (f'[✕] The Expression entererd is invalid.')
+        except InvalidOperationsError:
+            return ("[✕] Invalid order of opertaions.")
+        except InvalidParenthesesError:
+            return ("[✕] Parantheses in expression are mismatched.")
+        except ZeroDivisionError:
+            return ("[✕] The expression attempts to divide by zero.")
+        except ValueError as e:
+            return (e)
 
 
 
