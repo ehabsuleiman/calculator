@@ -1,8 +1,7 @@
 import re
 from enum import Enum
+from calculator.token_pkg import OPERATORS
 
-
-OPERATORS = ['/','*','+','-']
 PARENTHESES = ['(',')']
 
 

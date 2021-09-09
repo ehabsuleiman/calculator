@@ -2,6 +2,7 @@ from enum import Enum
 import re
 from  calculator.token_pkg.token_class import Token
 from calculator.utils import is_num,is_parentheses,is_operator,sanitize_string,Types
+from calculator.token_pkg import OPERATORS_STRING
 
 
 #enum to avoid errors
@@ -76,7 +77,7 @@ class Tokenizer:
     def split_postfix_expression(exp):
 
         #finds operators,deciamals,numbers
-        res = re.findall(r'[0-9\.]+|[*/+-]', exp)
+        res = re.findall(rf'[0-9\.]+|[{OPERATORS_STRING}]', exp)
 
         n = len(res)
 
@@ -97,7 +98,7 @@ class Tokenizer:
         exp = sanitize_string(exp)
 
         #finds operators,deciamals,numbers
-        res = re.findall(r'[0-9\.]+|[^0-9\  .]|[()^*/+-]', exp)
+        res = re.findall(rf'[0-9\.]+|[^0-9\  .]|[(){OPERATORS_STRING}]', exp)
 
         n = len(res)
 
