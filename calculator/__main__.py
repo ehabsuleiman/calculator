@@ -21,8 +21,6 @@ def eval_expression(expression):
         return res
     except OverflowError:
         print('\n[WARNING] Expression entered caused an overflow. \n')
-    except SyntaxError:
-        print('\n[WARNING] Expression entered caused a syntax error. \n')
 
         
 
