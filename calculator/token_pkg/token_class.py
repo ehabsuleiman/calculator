@@ -1,6 +1,6 @@
 from typing import NamedTuple
 from calculator.utils import Types
-
+from calculator.token_pkg import OPERATORS_INFO
 
 """
 just a class to give a type and value of token for more readability
@@ -12,19 +12,11 @@ class Token(NamedTuple):
     type: str
     value: str
 
-
-    #precedence in  math
-    PRECEDENCE = {
-        '*': 3, '/': 3,
-        '+': 2, '-': 2,
-    }
-
-
     #gets precedence of operator
     @property
     def precedence(self):
         if self.type == Types.OPERATOR:
-           return self.PRECEDENCE[self.value]
+           return OPERATORS_INFO[self.value]
     
     def is_less_precedent(self,token):
         if self.type == Types.OPERATOR:
